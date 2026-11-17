@@ -15,7 +15,7 @@ Peach & Parcel is a Vite React application. Deploy the production build as a sta
 | Install command | npm install |
 | Build command | npm run build |
 | Output directory | dist |
-| Production branch | master |
+| Production branch | main |
 
 No environment variables or backend service are required.
 
