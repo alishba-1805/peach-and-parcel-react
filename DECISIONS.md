@@ -1,37 +1,51 @@
-# Design decisions
+# Frontend decisions
 
-## Show comparison facts on product cards
+The original observations and dated captures are preserved in [docs/INVESTIGATION.md](docs/INVESTIGATION.md). They describe the reference UI inspected on 17 November 2026, not a newly asserted current defect.
 
-**Choice:** Display price, serving size, recipe status and current stock on each card.
+## 1. Put comparison facts beside the price
 
-**Reason:** Customers can compare suitable options before opening a detail page. Sold-out products remain visible with a clear status.
+**Problem:** The captured Cakewalk store cards show images, names and prices without consistent serving sizes, recipe egg status or stock.
 
-**Alternative:** Show only an image, name and price, with all other facts on the detail page.
+**Decision:** Every product card displays servings, recipe status, numerical availability and price, with explicit sold-out text. Mobile uses one readable column.
 
-**Tradeoff:** Cards contain more text. The mobile layout uses one column to keep that information readable.
+**Alternative:** Keep cards minimal and show comparison facts only on details.
 
-**Implementation:** src/components/ProductCard.jsx, src/pages/Shop.jsx and src/styles.css.
+**Reason:** Customers can compare portions and recipe suitability before making a selection. This is the information-hierarchy decision.
 
-## Keep browsing context and cart state together
+**Tradeoff:** Each card uses more vertical space.
 
-**Choice:** Store the cart, catalog and browsing filters in App. Pass values and action callbacks to the relevant pages.
+**Code location:** src/components/ProductCard.jsx; src/pages/Shop.jsx; src/styles.css.
 
-**Reason:** Search, categories and sorting work together, and navigating to details does not discard the current results. The header, cards, cart and checkout share one selection.
+**Evidence screenshot + reproduction steps:** [Reference](docs/screenshots/reference/01-comparison-desktop.png) → [app](docs/screenshots/app/desktop-shop.png). Open /shop; compare bento and cupcakes, then find sold-out red velvet. All 12 cards expose the same comparison fields.
 
-**Alternative:** Give each page independent state or introduce a separate state-management dependency.
+## 2. Provide immediate search and retain browsing context
 
-**Tradeoff:** Shared state makes App responsible for coordinating page actions. Filter state lasts for the visit rather than becoming a shareable URL.
+**Problem:** Cakewalk's inspected store/menu has sorting and four numbered pages without a visible direct product-search field.
 
-**Implementation:** src/App.jsx, src/pages/Shop.jsx and src/pages/ProductDetails.jsx.
+**Decision:** Combine controlled text search, category/recipe filters and price sorting. Keep filters in App while navigating between results and details.
 
-## Keep delivery calculations explicit
+**Alternative:** Require manual category/page scanning or reset discovery controls each time the customer returns.
 
-**Choice:** Apply a fixed PKR 200 delivery fee and a separate PKR 1,200 product minimum through shared pure functions.
+**Reason:** Customers searching for a flavour can narrow options quickly and compare details without repeating work. This is the interaction/state decision.
 
-**Reason:** Cart, checkout and confirmation can use the same calculation. Customers see the exact shortfall before continuing.
+**Tradeoff:** Filters persist for the visit, not in a shareable URL or after a full reload.
 
-**Alternative:** Introduce delivery tiers or promotional free-delivery thresholds.
+**Code location:** src/pages/Shop.jsx, updateFilter and matches/visible; src/App.jsx, filters state; src/pages/ProductDetails.jsx, Back to results link.
 
-**Tradeoff:** A fixed fee provides fewer promotional options but keeps eligibility and totals straightforward.
+**Evidence screenshot + reproduction steps:** [Reference](docs/screenshots/reference/02-no-search-mobile.png) → [mobile app](docs/screenshots/app/mobile-shop.png) / [empty results](docs/screenshots/app/empty-results.png). Search CHOCOLATE, select Cookies & bars, then egg-free: counts go 2 → 1 → 0. Reset, sort high, open details and use Back/Forward; context stays selected.
 
-**Implementation:** src/utils/rules.js, src/components/OrderSummary.jsx and src/pages/Checkout.jsx.
+## 3. Use one explicit delivery calculation
+
+**Problem:** The captured free-shipping banner implies a PKR 3,000 threshold, while the footer states nationwide free delivery over PKR 2,500 and a separate local fee. The selected product says local delivery; the banner does not qualify its promise.
+
+**Decision:** Disclose one fixed PKR 200 fee and a separate PKR 1,200 product minimum before checkout. Shared pure functions calculate and validate totals.
+
+**Alternative:** Use area-specific free-delivery tiers with qualified progress offers.
+
+**Reason:** Customers can reconcile eligibility, shortfall and totals across cart, checkout and receipt.
+
+**Tradeoff:** There is no promotional free-delivery incentive.
+
+**Code location:** src/utils/rules.js, checkMinimum/getLineTotal/getTotals; src/components/OrderSummary.jsx; src/pages/Checkout.jsx, handleSubmit; src/App.jsx, completeOrder.
+
+**Evidence screenshot + reproduction steps:** [Reference](docs/screenshots/reference/03-shipping-threshold-conflict.png) → [cart](docs/screenshots/app/cart.png) / [checkout](docs/screenshots/app/checkout.png). One loaf shows a PKR 600 shortfall and blocks checkout. Two loaves give 1,200 + 200 = 1,400 through confirmation. Reference-site final checkout charges were not tested; the original finding concerns communication, not overcharging.

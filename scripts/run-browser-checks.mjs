@@ -6,6 +6,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import journey from './browser-journey.mjs';
 import recovery from './browser-recovery.mjs';
 import access from './browser-access.mjs';
+import regression from './browser-regression.mjs';
 
 await mkdir('.cache/browser', { recursive: true });
 await mkdir('.cache', { recursive: true });
@@ -32,6 +33,7 @@ try {
   page.screenshot = originalScreenshot;
   await page.unroute('**/*');
   const accessibility = await access(page);
+  const regressions = await regression(page);
   await page.goto(baseUrl + "/shop");
   await page.waitForTimeout(650);
   await page.screenshot({ path: '.cache/browser/desktop-shop-viewport.png' });
@@ -39,9 +41,9 @@ try {
   const results = {
     date: new Date().toISOString(), target: baseUrl,
     build: 'Vite production preview', desktop, recovery: recovered, mobile,
-    accessibility, console: { errors, warnings },
+    accessibility, regressions, console: { errors, warnings },
   };
-  const count = desktop.length + recovered.length + mobile.length + accessibility.results.length;
+  const count = desktop.length + recovered.length + mobile.length + accessibility.results.length + regressions.length;
   await writeFile('.cache/browser-summary.json', JSON.stringify(results, null, 2));
   console.log(JSON.stringify({ assertions: count, pass: count, errors, warnings, browser: accessibility.browser }, null, 2));
   if (errors.length || warnings.length) process.exitCode = 1;

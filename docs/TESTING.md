@@ -81,8 +81,8 @@ The cart should explain both conflicts and require an explicit correction or rem
 
 Last checked on 18 November 2026:
 
-- 40 unit tests passed.
-- 116 browser assertions passed.
+- 46 unit tests passed (the original 40 plus six focused calculation/recovery tests).
+- 150 browser assertions passed (the original 116 plus 34 additional recovery/access checks).
 - Production build completed.
 - Browser checks recorded no console errors or warnings.
 
@@ -91,3 +91,5 @@ Public deployment checks are separate from local verification. Keyboard and sema
 ## Dependency audit
 
 Run npm audit --omit=dev to inspect production dependencies and npm audit for the full dependency tree. The previous full audit reported development-only findings in Vite's glob dependency chain; no production findings were reported.
+
+The before/after audit, complete requirement matrix and command output are in [VERIFICATION.md](VERIFICATION.md). Set BROWSER_BASE_URL when using a preview port other than 4173.

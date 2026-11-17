@@ -109,9 +109,11 @@ The pure functions in src/utils/rules.js handle availability, compatibility, del
 
 Browsing filters are retained when returning from product details within the same visit. The cart persists across reloads. Saved IDs are checked against current product data, with explicit recovery for outdated entries.
 
+See the [lecture concept map](docs/REACT_NOTES_ALIGNMENT.md) for the exact component/function behind JSX, props, callback props, state, immutable updates, list methods, controlled forms, effects, asynchronous loading, storage and routing. The [audit](docs/REACT_AUDIT.md) explains the targeted simplifications and KEEP decisions.
+
 ## Testing and recovery
 
-Recorded verification covers **40 passing Node.js tests** and **116 passing browser assertions**, including complete journeys at 390px and 1280px, keyboard interaction, storage recovery, asset loading and horizontal-overflow checks. The browser run recorded no console errors or warnings. See [the testing guide](docs/TESTING.md) for coverage and reproduction steps.
+Recorded verification covers **46 passing Node.js tests** and **150 passing browser assertions**, including complete journeys at 390px and 1280px, keyboard interaction, storage recovery, asset loading and horizontal-overflow checks. The browser run recorded no console errors or warnings. See [the testing guide](docs/TESTING.md) for coverage and reproduction steps.
 
 To repeat browser checks, install the optional tooling without adding it to the application dependencies:
 
@@ -146,13 +148,21 @@ Customer name, phone and address stay in component memory. The cart stores only 
 
 ## Documentation and deployment
 
-- [Design decisions](DECISIONS.md): interface choices, alternatives and tradeoffs.
+- [Design decisions](DECISIONS.md): three evidenced interface choices, alternatives and tradeoffs.
+- [Reference investigation](docs/INVESTIGATION.md): original dated observations and unchanged screenshots.
+- [Lecture alignment](docs/REACT_NOTES_ALIGNMENT.md): verified note sources and actual code locations.
+- [Viva guide](VIVA_GUIDE.md): a short walkthrough, ten answers and three practice edits.
+- [Verification](docs/VERIFICATION.md): the FR01–FR19 matrix and actual before/after results.
 - [Asset notes](docs/ASSETS.md): original illustrations and fallback assets.
 - [Testing guide](docs/TESTING.md): automated checks and recovery scenarios.
 - [Deployment guide](docs/DEPLOYMENT.md): Vercel settings and release verification.
 - [Mobile preview](docs/images/storefront-mobile.png): the storefront at 390px.
 
 Vercel configuration is included for client-side routing. Public deployment remains pending.
+
+## Submission artifacts
+
+The editable report is [docs/REPORT.html](docs/REPORT.html). Run node scripts/build-submission.mjs after the final commit to create a matching source ZIP and standalone report outside the repository. The report template keeps [FINAL_COMMIT_HASH]; generated artifacts use the actual HEAD. Section remains [SECTION] until supplied.
 
 ## Author
 
