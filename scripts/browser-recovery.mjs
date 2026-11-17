@@ -52,7 +52,7 @@ export default async (page) => {
     ),
   );
   await page.screenshot({
-    path: "docs/screenshots/app/recipe-conflict.png",
+    path: ".cache/browser/recipe-conflict.png",
     fullPage: true,
   });
   await page.getByLabel("Egg-free products only", { exact: true }).uncheck();
@@ -77,7 +77,7 @@ export default async (page) => {
       .isDisabled(),
   );
   await page.screenshot({
-    path: "docs/screenshots/app/stock-conflict.png",
+    path: ".cache/browser/stock-conflict.png",
     fullPage: true,
   });
   await page.getByRole("link", { name: "The menu", exact: true }).click();
@@ -100,7 +100,7 @@ export default async (page) => {
   );
   await click("Remove Strawberry Sunday Bento");
   check(
-    "FR07 remove reaches useful empty state",
+    "remove reaches useful empty state",
     (await page.locator("main").innerText()).includes("Your parcel is empty."),
   );
   await visit("/shop");
@@ -110,11 +110,11 @@ export default async (page) => {
     .getByRole("button", { name: "Retry loading", exact: true })
     .waitFor();
   check(
-    "FR14 genuine loader rejection visible",
+    "genuine loader rejection visible",
     (await page.locator("main").innerText()).includes("could not be loaded"),
   );
   await page.screenshot({
-    path: "docs/screenshots/app/loading-error.png",
+    path: ".cache/browser/loading-error.png",
     fullPage: true,
   });
   await click("Retry loading");
@@ -122,11 +122,11 @@ export default async (page) => {
     .getByRole("button", { name: "Add Little Lemon Loaf", exact: true })
     .waitFor();
   check(
-    "FR14 retry returns twelve products",
+    "retry returns twelve products",
     (await page.locator(".product-card").count()) === 12,
   );
   await page.screenshot({
-    path: "docs/screenshots/app/loading-retry.png",
+    path: ".cache/browser/loading-retry.png",
     fullPage: true,
   });
   await click("Simulate empty catalog");
@@ -134,13 +134,13 @@ export default async (page) => {
     .getByRole("button", { name: "Restore catalog", exact: true })
     .waitFor();
   check(
-    "FR15 empty dataset separate from zero matches",
+    "empty dataset separate from zero matches",
     (await page.locator("main").innerText()).includes(
       "loader returned zero records",
     ),
   );
   await page.screenshot({
-    path: "docs/screenshots/app/empty-catalog.png",
+    path: ".cache/browser/empty-catalog.png",
     fullPage: true,
   });
   await click("Restore catalog");
@@ -148,19 +148,19 @@ export default async (page) => {
     .getByRole("button", { name: "Add Little Lemon Loaf", exact: true })
     .waitFor();
   check(
-    "FR15 restore catalog recovers menu",
+    "restore catalog recovers menu",
     (await page.locator(".product-card").count()) === 12,
   );
   await visit("/products/does-not-exist");
   check(
-    "FR02 unknown product useful fallback",
+    "unknown product useful fallback",
     await page
       .getByRole("heading", { name: "Dessert not found", exact: true })
       .isVisible(),
   );
   await visit("/unknown-page");
   check(
-    "FR01 unknown route useful fallback",
+    "unknown route useful fallback",
     await page
       .getByRole("heading", { name: "This page wandered off.", exact: true })
       .isVisible(),
@@ -170,7 +170,7 @@ export default async (page) => {
   );
   await visit("/cart");
   check(
-    "FR13 malformed storage recovery visible",
+    "malformed storage recovery visible",
     (await page.locator(".notice").innerText()).includes("could not be read"),
   );
   await page.evaluate(() =>
@@ -184,15 +184,15 @@ export default async (page) => {
   );
   await visit("/cart");
   check(
-    "FR13 old IDs retained and explained",
+    "old IDs retained and explained",
     (await page.locator("main").innerText()).includes("old-dessert"),
   );
   check(
-    "FR13 restored overstock kept for correction",
+    "restored overstock kept for correction",
     (await page.locator(".quantity-control span").innerText()) === "5",
   );
   check(
-    "FR13 conflicting restored cart blocked",
+    "conflicting restored cart blocked",
     await page
       .getByRole("button", { name: "Resolve your parcel to continue" })
       .isDisabled(),
@@ -200,7 +200,7 @@ export default async (page) => {
   await click("Remove saved dessert");
   await click("Use an available quantity");
   check(
-    "FR13 explicit correction repairs to current stock",
+    "explicit correction repairs to current stock",
     (await page.locator(".quantity-control span").innerText()) === "4",
   );
   await visit("/products/red-velvet");
@@ -226,14 +226,14 @@ export default async (page) => {
       "/images/fallback.svg",
   );
   await page.screenshot({
-    path: "docs/screenshots/app/image-fallback.png",
+    path: ".cache/browser/image-fallback.png",
     fullPage: true,
   });
   await page.unroute("**/images/lemon-loaf.svg");
   await page.evaluate(() => sessionStorage.removeItem("peach-parcel-receipt"));
   await visit("/confirmation");
   check(
-    "FR16 direct no-receipt route is useful",
+    "direct no-receipt route is useful",
     await page
       .getByRole("heading", { name: "No order summary yet", exact: true })
       .isVisible(),

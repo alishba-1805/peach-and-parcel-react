@@ -1,9 +1,12 @@
 node_modules/
 dist/
 .cache/
-.tools/
-.env*
 .playwright-mcp/
+.vercel/
 artifacts/
+.env
+.env.*
 *.log
-Peach_and_Parcel_Codex_Master_Prompt.md
+*.zip
+.DS_Store
+Thumbs.db

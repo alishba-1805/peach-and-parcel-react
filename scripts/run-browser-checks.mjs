@@ -1,11 +1,11 @@
-// Optional assessment harness. Playwright is not an application dependency.
+// Optional browser regression checks. Playwright is not an application dependency.
 import { chromium } from 'playwright';
 import { mkdir, writeFile } from 'node:fs/promises';
 import journey from './browser-journey.mjs';
 import recovery from './browser-recovery.mjs';
 import access from './browser-access.mjs';
 
-await mkdir('docs/screenshots/app', { recursive: true });
+await mkdir('.cache/browser', { recursive: true });
 await mkdir('.cache', { recursive: true });
 const browser = await chromium.launch({ channel: process.env.BROWSER_CHANNEL || 'msedge' });
 try {
@@ -24,7 +24,7 @@ try {
   await page.route('**/*', route => route.continue());
   const originalScreenshot = page.screenshot.bind(page);
   page.screenshot = options => originalScreenshot({
-    ...options, path: options.path.replace('screenshots/app/', 'screenshots/app/mobile-'),
+    ...options, path: options.path.replace('browser/', 'browser/mobile-'),
   });
   const mobile = await journey(page);
   page.screenshot = originalScreenshot;
@@ -32,8 +32,8 @@ try {
   const accessibility = await access(page);
   await page.goto('http://127.0.0.1:4173/shop');
   await page.waitForTimeout(650);
-  await page.screenshot({ path: 'docs/screenshots/app/desktop-shop-viewport.png' });
-  await page.locator('.product-card').first().screenshot({ path: 'docs/screenshots/app/card-comparison.png' });
+  await page.screenshot({ path: '.cache/browser/desktop-shop-viewport.png' });
+  await page.locator('.product-card').first().screenshot({ path: '.cache/browser/card-comparison.png' });
   const results = {
     date: new Date().toISOString(), target: 'http://127.0.0.1:4173',
     build: 'Vite production preview', desktop, recovery: recovered, mobile,

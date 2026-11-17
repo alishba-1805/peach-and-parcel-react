@@ -2,9 +2,9 @@
 
 A React storefront for a boutique dessert studio, with a complete journey from product discovery to order review.
 
-[Explore the source](https://github.com/alishba-1805/peach-and-parcel-react) · [Design decisions](DECISIONS.md) · [Verification](docs/VERIFICATION.md)
+[Explore the source](https://github.com/alishba-1805/peach-and-parcel-react) · [Design decisions](DECISIONS.md) · [Testing](docs/TESTING.md)
 
-![Peach & Parcel storefront](docs/screenshots/app/desktop-shop-viewport.png)
+![Peach & Parcel storefront](docs/images/storefront-desktop.png)
 
 ## Overview
 
@@ -97,32 +97,21 @@ src/
 public/
   images/           Original local illustrations and image fallback
 tests/              Node.js rule, storage and loader tests
-scripts/            Illustration, browser-check and submission utilities
-docs/               Investigation, screenshots, verification and report
+scripts/            Illustration and browser-check utilities
+docs/               Deployment, testing, asset notes and preview images
 ```
 
 ## State and implementation
 
-| Concept                                                 | Source / use                                                            |
-| ------------------------------------------------------- | ----------------------------------------------------------------------- |
-| Function components, modules, JSX and semantic elements | Header, ProductCard and route components                                |
-| Props and callback props                                | App passes data and cart actions through Shop, Cart and QuantityControl |
-| Controlled inputs, events and preventDefault            | Checkout values/change/submit and Shop filters                          |
-| Functional updates and immutable arrays/objects         | App add/update/remove and form state updates                            |
-| Stable keys and conditional rendering                   | Product and receipt lists; errors, empty and unavailable states         |
-| Lifted state                                            | App owns cart, catalog and browsing filters                             |
-| Derived values and reduce                               | rules.getTotals calculates quantities, prices and fees                  |
-| Effects, dependencies and cleanup                       | App synchronizes storage and cancels superseded catalog requests        |
-| filter, sort, find, spread and destructuring            | Shop discovery controls and product lookups                             |
-| Promises, async/await and failure handling              | loadProducts and App's catalog effect                                   |
-| Browser storage                                         | storage.js, cart persistence and nonpersonal receipt restoration        |
-| Route parameters, links and navigation                  | ProductDetails, Header and Checkout                                     |
+App owns the cart, catalog and browsing filters. Route components receive the values and callback props they need, keeping counts, quantities and summaries consistent.
+
+The pure functions in src/utils/rules.js handle availability, compatibility, delivery eligibility and totals. The asynchronous catalog loader supports loading, cancellation and recovery states.
 
 Browsing filters are retained when returning from product details within the same visit. The cart persists across reloads. Saved IDs are checked against current product data, with explicit recovery for outdated entries.
 
 ## Testing and recovery
 
-Recorded verification covers **40 passing Node.js tests** and **116 passing browser assertions**, including complete journeys at 390px and 1280px, keyboard interaction, storage recovery, asset loading and horizontal-overflow checks. The browser run recorded no console errors or warnings. See [the verification record](docs/VERIFICATION.md) and [individual results](docs/browser-results.json).
+Recorded verification covers **40 passing Node.js tests** and **116 passing browser assertions**, including complete journeys at 390px and 1280px, keyboard interaction, storage recovery, asset loading and horizontal-overflow checks. The browser run recorded no console errors or warnings. See [the testing guide](docs/TESTING.md) for coverage and reproduction steps.
 
 To repeat browser checks, install the optional tooling without adding it to the application dependencies:
 
@@ -138,7 +127,7 @@ Keep preview running, then use another terminal:
 node scripts/run-browser-checks.mjs
 ```
 
-The runner uses Microsoft Edge and the local preview at http://127.0.0.1:4173.
+The runner uses Microsoft Edge and the local preview at http://127.0.0.1:4173. Generated screenshots and results are saved under .cache/ and remain outside version control.
 
 The footer's **Catalog scenarios** disclosure provides reproducible recovery checks:
 
@@ -147,7 +136,7 @@ The footer's **Catalog scenarios** disclosure provides reproducible recovery che
 3. **Reduce stock** changes Strawberry Sunday Bento stock to 0 and Vanilla Cloud Cupcakes stock to 2. Add four first to inspect a retained quantity conflict.
 4. **Reset catalog** restores ordinary catalog data and stock without clearing the cart.
 
-Malformed saved JSON, unknown IDs, missing images, invalid URLs and form recovery are documented in [VERIFICATION.md](docs/VERIFICATION.md).
+Malformed saved JSON, unknown IDs, missing images, invalid URLs and form recovery are documented in [TESTING.md](docs/TESTING.md).
 
 ## Scope and privacy
 
@@ -157,18 +146,16 @@ Customer name, phone and address stay in component memory. The cart stores only 
 
 ## Documentation and deployment
 
-- [Frontend decisions](DECISIONS.md): three observed usability problems and the chosen improvements.
-- [Reference investigation](docs/INVESTIGATION.md): source URLs, reproduction steps and genuine screenshots.
-- [Asset provenance](docs/ASSETS.md): original illustrations and fallback assets.
-- [Deployment guide](docs/DEPLOYMENT.md): Vercel settings, nested-route verification and submission packaging.
-- [Report source](docs/REPORT.html): editable project report.
-- [Viva guide](VIVA_GUIDE.md): code walkthrough and practice changes.
+- [Design decisions](DECISIONS.md): interface choices, alternatives and tradeoffs.
+- [Asset notes](docs/ASSETS.md): original illustrations and fallback assets.
+- [Testing guide](docs/TESTING.md): automated checks and recovery scenarios.
+- [Deployment guide](docs/DEPLOYMENT.md): Vercel settings and release verification.
+- [Mobile preview](docs/images/storefront-mobile.png): the storefront at 390px.
 
-Vercel configuration is included for client-side routing. Public deployment remains pending. The development dependency audit findings and outstanding submission details are recorded in the verification documentation.
+Vercel configuration is included for client-side routing. Public deployment remains pending.
 
 ## Author
 
 **[Alishba Inam](https://github.com/alishba-1805)**
 **Roll number:** 24i-2036
 BS Cyber Security · FAST-NUCES, Islamabad
-CS4032 Web Programming · Assignment 02 · Fall 2026

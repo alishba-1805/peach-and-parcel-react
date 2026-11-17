@@ -15,11 +15,11 @@ export default async (page) => {
     .getByRole("button", { name: "Add Little Lemon Loaf", exact: true })
     .waitFor();
   check(
-    "FR03 twelve products rendered",
+    "twelve products rendered",
     (await page.locator(".product-card").count()) === 12,
   );
   check(
-    "FR18 comparison data visible on cards",
+    "comparison data visible on cards",
     await page
       .locator(".product-card")
       .first()
@@ -34,7 +34,7 @@ export default async (page) => {
   await page.getByRole("searchbox").fill("CHOCOLATE");
   await page.waitForTimeout(100);
   check(
-    "FR04 case-insensitive title and description search",
+    "case-insensitive title and description search",
     (await page.locator(".product-card").count()) === 2,
   );
   await page
@@ -42,19 +42,19 @@ export default async (page) => {
     .selectOption("Cookies & bars");
   await page.waitForTimeout(100);
   check(
-    "FR05 combined search and category",
+    "combined search and category",
     (await page.locator(".product-card").count()) === 1,
   );
   await page.getByLabel("Egg-free recipes", { exact: true }).check();
   await page.waitForTimeout(100);
   check(
-    "FR15 zero matches distinct",
+    "zero matches distinct",
     await page
       .getByRole("heading", { name: "No desserts match your search" })
       .isVisible(),
   );
   await page.screenshot({
-    path: "docs/screenshots/app/empty-results.png",
+    path: ".cache/browser/empty-results.png",
     fullPage: true,
   });
   await page
@@ -65,7 +65,7 @@ export default async (page) => {
   await page.getByLabel("Sort by", { exact: true }).selectOption("low");
   await page.waitForTimeout(100);
   check(
-    "FR05 ascending sort",
+    "ascending sort",
     (await page.locator(".product-card").first().innerText()).includes(
       "Little Lemon Loaf",
     ),
@@ -73,7 +73,7 @@ export default async (page) => {
   await page.getByLabel("Sort by", { exact: true }).selectOption("high");
   await page.waitForTimeout(100);
   check(
-    "FR05 descending sort",
+    "descending sort",
     (await page.locator(".product-card").first().innerText()).includes(
       "Rose & Pistachio",
     ),
@@ -83,33 +83,33 @@ export default async (page) => {
     .click();
   await page.waitForTimeout(100);
   check(
-    "FR02 parameterized details",
+    "parameterized details",
     page.url().endsWith("/products/rose-pistachio"),
   );
   check(
-    "FR06 details terms and facts",
+    "details terms and facts",
     (await page.locator(".detail-copy").innerText()).includes("6–8 people"),
   );
   await page.screenshot({
-    path: "docs/screenshots/app/detail.png",
+    path: ".cache/browser/detail.png",
     fullPage: true,
   });
   await page.goBack();
   await page.waitForTimeout(100);
   check(
-    "FR01 Back retains sort",
+    "Back retains sort",
     (await page.getByLabel("Sort by", { exact: true }).inputValue()) === "high",
   );
   await page.goForward();
   await page.waitForTimeout(100);
   check(
-    "FR01 Forward restores details route",
+    "Forward restores details route",
     page.url().includes("rose-pistachio"),
   );
   await page.getByRole("link", { name: "Back to your results" }).click();
   await page.waitForTimeout(100);
   check(
-    "FR08 filter state kept via results link",
+    "filter state kept via results link",
     (await page.getByLabel("Sort by", { exact: true }).inputValue()) === "high",
   );
   await page
@@ -124,7 +124,7 @@ export default async (page) => {
   await page.getByRole("link", { name: /Your parcel/ }).click();
   await page.waitForTimeout(100);
   check(
-    "FR11 minimum needed shown",
+    "minimum needed shown",
     (await page.locator("main").innerText()).includes("Add PKR 600 more"),
   );
   check(
@@ -138,7 +138,7 @@ export default async (page) => {
     .click();
   await page.waitForTimeout(100);
   check(
-    "FR07 increase + FR11 exact minimum total",
+    "increase + exact minimum total",
     (await page.locator(".grand-total").innerText()).includes("1,400"),
   );
   await page
@@ -146,7 +146,7 @@ export default async (page) => {
     .click();
   await page.waitForTimeout(100);
   check(
-    "FR07 decrease changes live summary",
+    "decrease changes live summary",
     (await page.locator(".grand-total").innerText()).includes("800"),
   );
   await page
@@ -158,11 +158,11 @@ export default async (page) => {
     .getByRole("link", { name: "Continue to checkout", exact: false })
     .waitFor();
   check(
-    "FR13 reload restores IDs and quantities",
+    "reload restores IDs and quantities",
     (await page.locator(".quantity-control span").innerText()) === "2",
   );
   await page.screenshot({
-    path: "docs/screenshots/app/cart.png",
+    path: ".cache/browser/cart.png",
     fullPage: true,
   });
   await page
@@ -176,15 +176,15 @@ export default async (page) => {
     .click();
   await page.waitForTimeout(100);
   check(
-    "FR10 three inline validation errors",
+    "three inline validation errors",
     (await page.locator('[aria-invalid="true"]').count()) === 3,
   );
   check(
-    "FR10 valid name preserved",
+    "valid name preserved",
     (await page.locator("#name").inputValue()) === "Sample Recipient",
   );
   await page.screenshot({
-    path: "docs/screenshots/app/checkout-validation.png",
+    path: ".cache/browser/checkout-validation.png",
     fullPage: true,
   });
   await page.locator("#phone").fill("03001234567");
@@ -202,7 +202,7 @@ export default async (page) => {
       .isEnabled(),
   );
   await page.screenshot({
-    path: "docs/screenshots/app/checkout.png",
+    path: ".cache/browser/checkout.png",
     fullPage: true,
   });
   await page
@@ -213,13 +213,13 @@ export default async (page) => {
     .getByRole("heading", { name: "A little joy, all wrapped up." })
     .waitFor();
   check(
-    "FR16 explicit simulated confirmation",
+    "explicit simulated confirmation",
     (await page.locator("main").innerText()).includes(
       "Simulated order — nothing was submitted.",
     ),
   );
   check(
-    "FR16 cart cleared after completion",
+    "cart cleared after completion",
     (await page.locator(".count").innerText()) === "0",
   );
   const storage = await page.evaluate(() => ({
@@ -234,7 +234,7 @@ export default async (page) => {
       !storage.receipt.includes("pretend"),
   );
   await page.screenshot({
-    path: "docs/screenshots/app/confirmation.png",
+    path: ".cache/browser/confirmation.png",
     fullPage: true,
   });
   await page.reload();
@@ -242,13 +242,13 @@ export default async (page) => {
     .getByText("Simulated order — nothing was submitted.", { exact: true })
     .waitFor();
   check(
-    "FR16 confirmation refresh restores receipt",
+    "confirmation refresh restores receipt",
     (await page.locator(".receipt").innerText()).includes("Little Lemon Loaf"),
   );
   await page.goto("http://127.0.0.1:4173/checkout");
   await page
     .getByRole("heading", { name: "Your parcel is empty", exact: true })
     .waitFor();
-  check("FR12 repeated checkout cannot reuse cleared cart", true);
+  check("repeated checkout cannot reuse cleared cart", true);
   return results;
 };

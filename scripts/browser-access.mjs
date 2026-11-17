@@ -125,20 +125,20 @@ export default async (page) => {
       if (path === "/shop") {
         await page.screenshot({
           path:
-            "docs/screenshots/app/" +
+            ".cache/browser/" +
             (width === 390 ? "mobile-shop.png" : "desktop-shop.png"),
           fullPage: width === 1280,
         });
         if (width === 390)
           await page.screenshot({
-            path: "docs/screenshots/app/mobile-shop-full.png",
+            path: ".cache/browser/mobile-shop-full.png",
             fullPage: true,
           });
       }
       if (path === "/")
         await page.screenshot({
           path:
-            "docs/screenshots/app/" +
+            ".cache/browser/" +
             (width === 390 ? "mobile-home.png" : "desktop-home.png"),
           fullPage: true,
         });
