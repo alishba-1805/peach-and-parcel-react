@@ -25,7 +25,7 @@ await writeFile(reportPath, report);
 const manifest = {
   commit, archive, reportHtml: reportPath, reportPdf: path.join(output, 'Peach_and_Parcel_Report.pdf'),
   archiveSha256: createHash('sha256').update(await readFile(archive)).digest('hex'),
-  publicDeployment: 'BLOCKED: authenticate, publish and verify first',
+  publicDeployment: 'BLOCKED: Vercel login, deployment and public verification required',
   identity: 'Draft until student details are filled in tracked report and README',
 };
 await writeFile(path.join(output, 'submission-manifest.json'), JSON.stringify(manifest, null, 2));

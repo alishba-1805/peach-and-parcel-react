@@ -2,9 +2,9 @@
 
 ## Current state
 
-Public repository: **https://github.com/alishba-1805/peach-and-parcel**. The configured remote is origin and the branch is master. Genuine incremental local commits were created from the empty folder and published; the original public-at-the-beginning requirement was not met and no chronology was fabricated.
+Public repository: **https://github.com/alishba-1805/peach-and-parcel**. The public branch is master. This environment could not write .git/config, so publication used the explicit repository URL rather than a persisted origin remote. Genuine incremental local commits were created from the empty folder and published; the original public-at-the-beginning requirement was not met and no chronology was fabricated.
 
-The first restricted-network auth check failed; the working Windows tool later confirmed GitHub authentication and created the public repository. Vercel CLI account configuration was not present. No Vercel deployment is claimed.
+The first restricted-network auth check failed; the working Windows tool later confirmed GitHub authentication and created the public repository. Vercel CLI account configuration was not present. No Vercel deployment is claimed. The deploy-to-vercel skill's no-auth fallback was attempted: its endpoint now returns instructions to authenticate with the Vercel CLI/dashboard, without a preview URL. This is an external-service/account limitation, not an application build failure.
 
 ## GitHub: next steps
 
@@ -15,12 +15,12 @@ The first restricted-network auth check failed; the working Windows tool later c
 ```powershell
 git add README.md docs/REPORT.html docs/VERIFICATION.md
 git commit -m "docs: record student details and verified deployment"
-git push origin master
+git push https://github.com/alishba-1805/peach-and-parcel.git master
 ```
 
 If Git reports dubious ownership because the tool-created .git belongs to the sandbox account, prepend each Git command with `git -c safe.directory="E:/OneDrive - FAST National University/FAST/BS (CY)/5th Semester/Web/Assignment 2"`. This trusts only this specific repository; do not set a wildcard exception. If login expires, run `gh auth login --hostname github.com --web` and choose the intended account.
 
-If you intended a different existing repository, change origin only after inspecting that repository's history. Do not force push or overwrite remote work.
+When .git/config is writable in your own terminal, you may run `git remote add origin https://github.com/alishba-1805/peach-and-parcel.git` and then `git push -u origin master`. If you intended a different existing repository, inspect that repository's history first. Do not force push or overwrite remote work.
 
 ## Vercel: exact clicks/settings
 
@@ -42,7 +42,7 @@ npm run build
 git status --short
 git add README.md docs/REPORT.html docs/VERIFICATION.md
 git commit -m "docs: record student details and verified public deployment"
-git push
+git push https://github.com/alishba-1805/peach-and-parcel.git master
 git rev-parse HEAD
 node scripts/build-submission.mjs '24I1234' 'YourNameWithoutSpaces' 'B'
 ```

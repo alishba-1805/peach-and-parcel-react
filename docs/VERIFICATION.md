@@ -87,3 +87,5 @@ The first browser run found React not defined although the build succeeded. Adde
 ## Evidence limits
 
 Public deployment verification is not performed. No real purchase/submission or final reference-site shipping charge was tested. Accessibility checks cover semantic controls, labels, keyboard/focus and layout; no screen-reader audit or full WCAG certification is claimed. Full-page screenshots intentionally preserve their actual states and may require zooming; report figures use readable viewport/element captures where possible.
+
+Public GitHub verified via API: repository visibility PUBLIC, default branch master, remote source SHA matches the pushed local commit. Local remote-config writes were denied, so Git push used the explicit HTTPS URL. Vercel skill fallback attempted: service returned CLI/login instructions instead of a deployment. FR19 remains BLOCKED.
