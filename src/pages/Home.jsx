@@ -20,7 +20,7 @@ export default function Home() {
             Explore the menu <span aria-hidden="true">↗</span>
           </Link>
           <p className="fine">
-            A student project · Every order is a simulation.
+            Thoughtfully packed for small celebrations.
           </p>
         </div>
         <div className="hero-art">
@@ -48,7 +48,7 @@ export default function Home() {
             choose. Your parcel stays with you as you explore.
           </p>
           <p>
-            Our fictional delivery area: F-6, F-7, F-8, G-9 and G-10, Islamabad.
+            Delivery area: F-6, F-7, F-8, G-9 and G-10, Islamabad.
             Product subtotal from PKR 1,200, plus a flat PKR 200 delivery fee.
           </p>
           <Link className="text-link" to="/shop">

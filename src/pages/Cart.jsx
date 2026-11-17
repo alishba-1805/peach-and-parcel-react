@@ -124,7 +124,7 @@ export default function Cart({
         <OrderSummary totals={totals}>
           {valid ? (
             <Link className="button full-width" to="/checkout">
-              Continue to demo checkout →
+              Continue to checkout →
             </Link>
           ) : (
             <>

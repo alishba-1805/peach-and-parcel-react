@@ -10,7 +10,7 @@ import { CART_KEY, ORDER_KEY, readCart, readReceipt } from "./utils/storage.js";
 import { loadProducts } from "./utils/loadProducts.js";
 import Header from "./components/Header.jsx";
 import CatalogStatus from "./components/CatalogStatus.jsx";
-import DemoChecks from "./components/DemoChecks.jsx";
+import ScenarioChecks from "./components/ScenarioChecks.jsx";
 import Home from "./pages/Home.jsx";
 import Shop from "./pages/Shop.jsx";
 import ProductDetails from "./pages/ProductDetails.jsx";
@@ -270,21 +270,21 @@ export default function App() {
       </main>
       <footer>
         <p className="brand">peach & parcel</p>
-        <p>A fictional dessert studio · Islamabad · Demo orders only</p>
+        <p>Dessert studio · Islamabad</p>
         <p className="fine">F-6 · F-7 · F-8 · G-9 · G-10</p>
-        <DemoChecks
+        <ScenarioChecks
           onLoad={requestCatalog}
           onStock={() => {
             setReducedStock(true);
             setNotice(
-              "Demo stock reduced. Existing selections are kept; review your parcel for conflicts.",
+              "Stock availability updated. Existing selections are kept; review your parcel for conflicts.",
             );
           }}
           onReset={() => {
             setReducedStock(false);
             requestCatalog("normal");
             setNotice(
-              "Ordinary demo catalog and stock restored. Your parcel is kept.",
+              "Catalog and stock restored. Your parcel is kept.",
             );
           }}
         />

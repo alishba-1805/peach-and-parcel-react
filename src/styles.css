@@ -736,24 +736,24 @@ footer > p:not(.brand) {
   color: var(--muted);
   margin-bottom: 8px;
 }
-.demo-checks {
+.scenario-checks {
   margin-top: 25px;
   border-top: 1px solid var(--line);
   padding-top: 15px;
   font-size: 12px;
 }
-.demo-checks summary {
+.scenario-checks summary {
   cursor: pointer;
   min-height: 36px;
   width: fit-content;
 }
-.demo-buttons {
+.scenario-buttons {
   display: flex;
   flex-wrap: wrap;
   gap: 9px;
   margin-top: 12px;
 }
-.demo-buttons button {
+.scenario-buttons button {
   padding: 10px 13px;
   border: 1px solid #c5b5aa;
   background: transparent;

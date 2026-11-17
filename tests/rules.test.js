@@ -80,7 +80,7 @@ test("invalid quantities never poison calculated totals", () =>
     0,
   ));
 const validForm = {
-  name: "Demo Guest",
+  name: "Sample Recipient",
   phone: "03001234567",
   address: "Sample house 10, pretend street",
   sector: "F-6",

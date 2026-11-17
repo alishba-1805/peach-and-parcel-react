@@ -29,7 +29,7 @@ export default function OrderSummary({ totals, children }) {
         Product minimum PKR 1,200. F-6, F-7, F-8, G-9 and G-10, Islamabad.
       </p>
       {children}
-      <p className="fine">Demo only · No payment · No real delivery</p>
+      <p className="fine">No payment is collected online.</p>
     </aside>
   );
 }

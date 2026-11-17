@@ -4,7 +4,7 @@ export default function CatalogStatus({ status, error, onRetry }) {
       <section className="empty-state" role="status">
         <p className="eyebrow">UNWRAPPING THE MENU</p>
         <h1>A little sweetness is on its way.</h1>
-        <p>Loading the local demo catalog…</p>
+        <p>Loading the catalog…</p>
       </section>
     );
   if (status === "error")
@@ -20,7 +20,7 @@ export default function CatalogStatus({ status, error, onRetry }) {
     );
   return (
     <section className="empty-state">
-      <p className="eyebrow">EMPTY DEMO CATALOG</p>
+      <p className="eyebrow">CATALOG UNAVAILABLE</p>
       <h1>No desserts in the catalog yet.</h1>
       <p>
         The loader returned zero records. This is different from a search with

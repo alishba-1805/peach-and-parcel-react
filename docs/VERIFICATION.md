@@ -37,7 +37,7 @@ The first browser run found React not defined although the build succeeded. Adde
 | FR13 | PASS | utils/storage.js; App storage effect | Reload, corrupt JSON, unknown IDs, overstock and explicit correction; browser recovery + Node tests. |
 | FR14 | PASS | utils/loadProducts.js; CatalogStatus.jsx | Promise loading/error/retry/abort; loading-error.png, loading-retry.png. |
 | FR15 | PASS | CatalogStatus.jsx; Shop.jsx | Empty dataset vs no matching results; useful Restore/Reset; empty-catalog.png, empty-results.png. |
-| FR16 | PASS | App.complete; Confirmation.jsx; storage.readReceipt | Itemized demo receipt, refresh, missing receipt, privacy and cleared cart; confirmation.png. |
+| FR16 | PASS | App.complete; Confirmation.jsx; storage.readReceipt | Itemized order summary, refresh, missing receipt, privacy and cleared cart; confirmation.png. |
 | FR17 | PASS | styles.css; semantic components | Full journeys + keyboard at 390/1280; no overflow/assets checks on six routes; mobile-shop.png. |
 | FR18 | PASS | ProductCard.jsx; Shop.jsx; OrderSummary.jsx | Three distinct observed problems and executed improvements; DECISIONS.md and INVESTIGATION.md. |
 | FR19 | BLOCKED | vercel.json; docs/DEPLOYMENT.md | SPA rewrite prepared. Local nested URLs/refresh pass; public GitHub/Vercel require account login. No public claim. |
@@ -74,7 +74,7 @@ The first browser run found React not defined although the build succeeded. Adde
 | Fractional/malformed saved quantity | PASS in Node; invalid quantity retained/normalized to conflict with a visible repair notice |
 | Missing product image | PASS: intercepted invalid SVG triggers local fallback; image-fallback.png |
 | Long product name | PASS: Cinnamon & Brown Butter Blondies detail/cart render at both widths without overflow |
-| Invalid form retains valid data | PASS: name stays Demo Guest while phone/address/sector errors appear |
+| Invalid form retains valid data | PASS: name stays Sample Recipient while phone/address/sector errors appear |
 | Confirmation refresh / no receipt | PASS: nonpersonal receipt restores; direct no-receipt access is helpful |
 | Personal values in storage | PASS: actual local/session payloads exclude sample name, phone, address |
 | Keyboard Tab/Enter/Space | PASS: search, preference, add, form and completion at both widths; focus outline verified |
@@ -89,3 +89,5 @@ The first browser run found React not defined although the build succeeded. Adde
 Public deployment verification is not performed. No real purchase/submission or final reference-site shipping charge was tested. Accessibility checks cover semantic controls, labels, keyboard/focus and layout; no screen-reader audit or full WCAG certification is claimed. Full-page screenshots intentionally preserve their actual states and may require zooming; report figures use readable viewport/element captures where possible.
 
 Public GitHub verified via API: repository visibility PUBLIC, default branch master, remote source SHA matches the pushed local commit. Local remote-config writes were denied, so Git push used the explicit HTTPS URL. Vercel skill fallback attempted: service returned CLI/login instructions instead of a deployment. FR19 remains BLOCKED.
+
+Presentation refresh verified on 18 November 2026: 40 Node tests and 116 browser assertions pass; zero console errors or warnings. Recovery controls are labeled Catalog scenarios, Reduce stock and Reset catalog. Checkout retains an explicit simulation notice.

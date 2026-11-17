@@ -27,12 +27,12 @@ When .git/config is writable in your own terminal, you may run `git remote add o
 1. Sign into Vercel with your own account. Click **Add New → Project → Import Git Repository**, authorize GitHub access if needed, and select the repository.
 2. Framework preset **Vite**; root **./**; install **npm install**; build **npm run build**; output **dist**. No environment variables required.
 3. Production branch is currently **master**. Keep that branch or deliberately rename/push main and adjust Vercel. Click **Deploy**.
-4. Copy the real public production URL. Open it in a private window. Directly open and refresh **/products/strawberry-bento**, **/cart** and **/checkout**; verify images and full demo order flow at 390/1280.
+4. Copy the real public production URL. Open it in a private window. Directly open and refresh **/products/strawberry-bento**, **/cart** and **/checkout**; verify images and full sample order flow at 390/1280.
 5. In Vercel deployment details, compare the source SHA to `git rev-parse HEAD`. The included vercel.json rewrites nested paths to index.html.
 
 ## Finish student details and matching artifacts
 
-Fill student name, roll, section and real repository/deployment links in README and docs/REPORT.html. Student identity is intentionally blank; Git author identity is not treated as student identity. The generated report is a **draft until these details and public evidence are supplied**.
+Fill student name, roll, section and real repository/deployment links in README and docs/REPORT.html. Student name and roll number are recorded as Alishba Inam, 24i-2036. Section remains to be supplied. The generated report is a **draft until these details and public evidence are supplied**.
 
 After publishing, commit the real URLs/details and push; allow Vercel to redeploy that commit. Re-run tests/build and public checks. Keep **[FINAL_COMMIT_HASH]** in the tracked report template. Never hardcode its own commit hash in that tracked file.
 
@@ -47,7 +47,7 @@ git rev-parse HEAD
 node scripts/build-submission.mjs '24I1234' 'YourNameWithoutSpaces' 'B'
 ```
 
-Replace example arguments with your own details. The generator archives **HEAD**, verifies tracked source is clean, inserts the actual final hash into a standalone HTML report and writes artifacts to the printed temporary folder outside this repository. With no arguments it deliberately uses **RollNo_Name_Section_A#02.zip**, a placeholder-safe draft filename.
+Replace example arguments with your own details. The generator archives **HEAD**, verifies tracked source is clean, inserts the actual final hash into a standalone HTML report and writes artifacts to the printed temporary folder outside this repository. With no arguments it deliberately uses **24i-2036_AlishbaInam_Section_A#02.zip**, a placeholder-safe draft filename.
 
 Open the generated report HTML in Chrome/Edge → **Ctrl+P → Save as PDF**, paper A4, background graphics on, browser headers/footers off. Save PDF beside the HTML, outside Git. A headless Playwright script can instead open that HTML and call `page.pdf({path:'.../Peach_and_Parcel_Report.pdf',format:'A4',printBackground:true})`.
 

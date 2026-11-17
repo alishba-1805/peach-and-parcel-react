@@ -13,7 +13,7 @@ export function checkStock(quantity, stock) {
     return {
       valid: false,
       message:
-        "This dessert is unavailable. Remove it or restore the demo stock.",
+        "This dessert is unavailable. Remove it or restore stock.",
     };
   }
   if (quantity > stock) {

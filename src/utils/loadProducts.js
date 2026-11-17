@@ -15,7 +15,7 @@ export async function loadProducts(mode = "normal", signal) {
   });
   if (mode === "failure")
     throw new Error(
-      "The demo catalog could not be loaded. Your saved parcel is safe.",
+      "The catalog could not be loaded. Your saved parcel is safe.",
     );
   return mode === "empty" ? [] : products.map((product) => ({ ...product }));
 }

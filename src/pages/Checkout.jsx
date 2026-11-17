@@ -83,7 +83,7 @@ export default function Checkout({ cart, products, totals, onComplete }) {
     return (
       <section className="empty-state">
         <h1>Your parcel is empty</h1>
-        <p>Add a dessert before starting a demo delivery request.</p>
+        <p>Add a dessert before starting a delivery request.</p>
         <Link className="button" to="/shop">
           Explore the menu
         </Link>
@@ -97,7 +97,7 @@ export default function Checkout({ cart, products, totals, onComplete }) {
           Send some <em>sweetness.</em>
         </h1>
         <p>
-          Demo checkout · Use sample information only. Nothing is submitted.
+          Simulated checkout · Use sample information only. Nothing is submitted.
         </p>
       </section>
       <div className="checkout-layout">
@@ -107,7 +107,7 @@ export default function Checkout({ cart, products, totals, onComplete }) {
             These fields stay in memory for this page only. We never save your
             name, phone or address.
           </p>
-          {field("name", "Sample recipient name", "For example: Demo Guest")}
+          {field("name", "Sample recipient name", "For example: Sample Recipient")}
           {field(
             "phone",
             "Sample Pakistani mobile",
@@ -193,7 +193,7 @@ export default function Checkout({ cart, products, totals, onComplete }) {
             type="submit"
             disabled={completed || issues.length > 0 || !minimum.valid}
           >
-            Confirm demo request
+            Confirm request
           </button>
           <p className="fine">No order, payment or message will be sent.</p>
         </form>

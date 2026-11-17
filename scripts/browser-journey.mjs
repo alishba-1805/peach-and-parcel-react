@@ -155,7 +155,7 @@ export default async (page) => {
   await page.waitForTimeout(100);
   await page.reload();
   await page
-    .getByRole("link", { name: "Continue to demo checkout", exact: false })
+    .getByRole("link", { name: "Continue to checkout", exact: false })
     .waitFor();
   check(
     "FR13 reload restores IDs and quantities",
@@ -166,13 +166,13 @@ export default async (page) => {
     fullPage: true,
   });
   await page
-    .getByRole("link", { name: "Continue to demo checkout", exact: false })
+    .getByRole("link", { name: "Continue to checkout", exact: false })
     .click();
   await page.waitForTimeout(100);
-  await page.locator("#name").fill("Demo Guest");
+  await page.locator("#name").fill("Sample Recipient");
   await page.waitForTimeout(100);
   await page
-    .getByRole("button", { name: "Confirm demo request", exact: true })
+    .getByRole("button", { name: "Confirm request", exact: true })
     .click();
   await page.waitForTimeout(100);
   check(
@@ -181,7 +181,7 @@ export default async (page) => {
   );
   check(
     "FR10 valid name preserved",
-    (await page.locator("#name").inputValue()) === "Demo Guest",
+    (await page.locator("#name").inputValue()) === "Sample Recipient",
   );
   await page.screenshot({
     path: "docs/screenshots/app/checkout-validation.png",
@@ -198,7 +198,7 @@ export default async (page) => {
   check(
     "R2 compatible single product accepted",
     await page
-      .getByRole("button", { name: "Confirm demo request", exact: true })
+      .getByRole("button", { name: "Confirm request", exact: true })
       .isEnabled(),
   );
   await page.screenshot({
@@ -206,7 +206,7 @@ export default async (page) => {
     fullPage: true,
   });
   await page
-    .getByRole("button", { name: "Confirm demo request", exact: true })
+    .getByRole("button", { name: "Confirm request", exact: true })
     .click();
   await page.waitForTimeout(100);
   await page
@@ -215,7 +215,7 @@ export default async (page) => {
   check(
     "FR16 explicit simulated confirmation",
     (await page.locator("main").innerText()).includes(
-      "Demo order — nothing was submitted.",
+      "Simulated order — nothing was submitted.",
     ),
   );
   check(
@@ -229,7 +229,7 @@ export default async (page) => {
   check(
     "privacy only nonpersonal receipt stored",
     storage.local === "[]" &&
-      !storage.receipt.includes("Demo Guest") &&
+      !storage.receipt.includes("Sample Recipient") &&
       !storage.receipt.includes("03001234567") &&
       !storage.receipt.includes("pretend"),
   );
@@ -239,7 +239,7 @@ export default async (page) => {
   });
   await page.reload();
   await page
-    .getByText("Demo order — nothing was submitted.", { exact: true })
+    .getByText("Simulated order — nothing was submitted.", { exact: true })
     .waitFor();
   check(
     "FR16 confirmation refresh restores receipt",

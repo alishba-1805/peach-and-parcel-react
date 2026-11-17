@@ -4,8 +4,8 @@ export default function Confirmation({ order }) {
   if (!order)
     return (
       <section className="empty-state">
-        <h1>No demo receipt yet</h1>
-        <p>Complete a valid demo checkout to see an itemized receipt here.</p>
+        <h1>No order summary yet</h1>
+        <p>Complete a valid checkout to see an itemized receipt here.</p>
         <Link className="button" to="/shop">
           Explore the menu
         </Link>
@@ -16,18 +16,18 @@ export default function Confirmation({ order }) {
       <span className="confirmation-mark" aria-hidden="true">
         ✓
       </span>
-      <p className="eyebrow">YOUR DEMO PARCEL IS READY</p>
+      <p className="eyebrow">YOUR PARCEL IS READY</p>
       <h1>
         A little joy,
         <br />
         <em>all wrapped up.</em>
       </h1>
       <p>
-        <strong>Demo order — nothing was submitted.</strong>
+        <strong>Simulated order — nothing was submitted.</strong>
       </p>
       <p>No payment, real order or delivery has been arranged.</p>
       <div className="receipt">
-        <p className="eyebrow">DEMO RECEIPT / {order.reference}</p>
+        <p className="eyebrow">ORDER SUMMARY / {order.reference}</p>
         <ul className="receipt-lines">
           {order.items.map((item) => (
             <li key={item.id}>

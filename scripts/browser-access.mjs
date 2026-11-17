@@ -64,12 +64,12 @@ export default async (page) => {
     await page.keyboard.press("Enter");
     await page.waitForTimeout(100);
     await page
-      .getByRole("link", { name: "Continue to demo checkout", exact: false })
+      .getByRole("link", { name: "Continue to checkout", exact: false })
       .focus();
     await page.keyboard.press("Enter");
     await page.waitForTimeout(100);
     await page.locator("#name").focus();
-    await page.keyboard.type("Demo Guest");
+    await page.keyboard.type("Sample Recipient");
     await page.keyboard.press("Tab");
     await page.keyboard.type("03001234567");
     await page.keyboard.press("Tab");
@@ -82,7 +82,7 @@ export default async (page) => {
     await page.getByLabel("Egg-free products only", { exact: true }).focus();
     await page.keyboard.press("Space");
     await page
-      .getByRole("button", { name: "Confirm demo request", exact: true })
+      .getByRole("button", { name: "Confirm request", exact: true })
       .focus();
     await page.keyboard.press("Enter");
     await page

@@ -42,7 +42,7 @@ export default async (page) => {
   check(
     "R2 incompatible single product blocked",
     await page
-      .getByRole("button", { name: "Confirm demo request", exact: true })
+      .getByRole("button", { name: "Confirm request", exact: true })
       .isDisabled(),
   );
   check(
@@ -60,12 +60,12 @@ export default async (page) => {
   check(
     "R2 ordinary preference restores eligibility",
     await page
-      .getByRole("button", { name: "Confirm demo request", exact: true })
+      .getByRole("button", { name: "Confirm request", exact: true })
       .isEnabled(),
   );
   await visit("/cart");
-  await page.locator(".demo-checks summary").click();
-  await click("Reduce demo stock");
+  await page.locator(".scenario-checks summary").click();
+  await click("Reduce stock");
   check(
     "R1 reduced stock retains saved quantity",
     (await page.locator(".quantity-control span").innerText()) === "4",
@@ -90,9 +90,9 @@ export default async (page) => {
       "This dessert is unavailable",
     ),
   );
-  await click("Reset demo data");
+  await click("Reset catalog");
   await page
-    .getByRole("link", { name: "Continue to demo checkout", exact: false })
+    .getByRole("link", { name: "Continue to checkout", exact: false })
     .waitFor();
   check(
     "reset restores stock without clearing parcel",
@@ -104,7 +104,7 @@ export default async (page) => {
     (await page.locator("main").innerText()).includes("Your parcel is empty."),
   );
   await visit("/shop");
-  await page.locator(".demo-checks summary").click();
+  await page.locator(".scenario-checks summary").click();
   await click("Simulate loading failure");
   await page
     .getByRole("button", { name: "Retry loading", exact: true })
@@ -235,7 +235,7 @@ export default async (page) => {
   check(
     "FR16 direct no-receipt route is useful",
     await page
-      .getByRole("heading", { name: "No demo receipt yet", exact: true })
+      .getByRole("heading", { name: "No order summary yet", exact: true })
       .isVisible(),
   );
   return results;
