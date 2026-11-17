@@ -1,4 +1,4 @@
-import { getTotals } from "./rules.js";
+import { getTotals, MINIMUM_SUBTOTAL } from "./rules.js";
 export const CART_KEY = "peach-parcel-cart";
 export const ORDER_KEY = "peach-parcel-receipt";
 
@@ -81,7 +81,7 @@ export function readReceipt() {
       quantity,
     }));
     const totals = getTotals(items, items);
-    if (totals.subtotal < 1200) return null;
+    if (totals.subtotal < MINIMUM_SUBTOTAL) return null;
     return { reference: saved.reference, items, ...totals };
   } catch {
     return null;
