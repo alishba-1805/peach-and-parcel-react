@@ -5,7 +5,7 @@ CS4032 Web Programming, Assignment 02, FAST-NUCES Islamabad, Fall 2026
 
 A fictional boutique dessert studio for students, young professionals and small celebrations. Twelve original dessert records support discovery, comparison, selection, a fictional delivery form, calculated review and simulated confirmation. Coverage: **F-6, F-7, F-8, G-9 and G-10, Islamabad**. The business goal is a valid simulated dessert-order request.
 
-**GitHub:** https://github.com/alishba-1805/peach-and-parcel  
+**GitHub:** https://github.com/alishba-1805/peach-and-parcel-react  
 **Vercel:** [NOT DEPLOYED — account login required]
 
 ## Run locally
