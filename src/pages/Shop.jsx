@@ -1,9 +1,127 @@
-import ProductCard from '../components/ProductCard.jsx';
-export default function Shop({ products, filters, setFilters, onAdd, cart = [] }) {
+import ProductCard from "../components/ProductCard.jsx";
+export default function Shop({
+  products,
+  filters,
+  setFilters,
+  onAdd,
+  cart = [],
+}) {
   const { search, category, eggFree, sort } = filters;
-  const matches = products.filter(product => (product.name + ' ' + product.description + ' ' + product.category).toLowerCase().includes(search.trim().toLowerCase()) && (category === 'All' || product.category === category) && (!eggFree || product.eggFree));
-  const visible = [...matches].sort((a, b) => sort === 'low' ? a.price - b.price : sort === 'high' ? b.price - a.price : 0);
-  function change(field, value) { setFilters(previous => ({ ...previous, [field]: value })); }
-  function reset() { setFilters({ search: '', category: 'All', eggFree: false, sort: 'studio' }); }
-  return <><section className="page-heading"><p className="eyebrow">THE DESSERT EDIT / 12 STUDIO RECIPES</p><h1>A little box of <em>lovely.</em></h1><p>Cakes for two, treats to share, and a few reasons to celebrate Tuesday.</p></section><section aria-label="Find your dessert" className="filters"><label className="search-label">Find something sweet<input type="search" placeholder="Try strawberry, chocolate, or cupcakes" value={search} onChange={e => change('search',e.target.value)}/></label><label>Category<select value={category} onChange={e => change('category',e.target.value)}>{['All','Cakes','Cupcakes','Cookies & bars','Dessert cups'].map(value => <option key={value}>{value}</option>)}</select></label><label>Sort by<select value={sort} onChange={e => change('sort',e.target.value)}><option value="studio">Studio favourites</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option></select></label><label className="check-label"><input type="checkbox" checked={eggFree} onChange={e => change('eggFree',e.target.checked)}/>Egg-free recipes</label></section><div className="results-heading"><p aria-live="polite">{visible.length} {visible.length === 1 ? 'dessert' : 'desserts'} to discover</p><button className="text-button" onClick={reset}>Reset filters</button></div>{visible.length ? <section className="product-grid" aria-label="Desserts">{visible.map(product => <ProductCard key={product.id} product={product} onAdd={onAdd} selected={cart.find(item => item.id === product.id)?.quantity || 0}/>)}</section> : <section className="empty-state"><h2>No desserts match your search</h2><p>Try a different flavour or clear the filters to see the whole menu.</p><button className="button" onClick={reset}>Reset filters</button></section>}<p className="recipe-note">Egg-free is a simulated recipe label, not an allergy or cross-contamination guarantee.</p></>;
+  const matches = products.filter(
+    (product) =>
+      (product.name + " " + product.description + " " + product.category)
+        .toLowerCase()
+        .includes(search.trim().toLowerCase()) &&
+      (category === "All" || product.category === category) &&
+      (!eggFree || product.eggFree),
+  );
+  const visible = [...matches].sort((a, b) =>
+    sort === "low"
+      ? a.price - b.price
+      : sort === "high"
+        ? b.price - a.price
+        : 0,
+  );
+  function change(field, value) {
+    setFilters((previous) => ({ ...previous, [field]: value }));
+  }
+  function reset() {
+    setFilters({ search: "", category: "All", eggFree: false, sort: "studio" });
+  }
+  return (
+    <>
+      <section className="page-heading">
+        <p className="eyebrow">THE DESSERT EDIT / 12 STUDIO RECIPES</p>
+        <h1>
+          A little box of <em>lovely.</em>
+        </h1>
+        <p>
+          Cakes for two, treats to share, and a few reasons to celebrate
+          Tuesday.
+        </p>
+      </section>
+      <section aria-label="Find your dessert" className="filters">
+        <label className="search-label">
+          Find something sweet
+          <input
+            type="search"
+            placeholder="Try strawberry, chocolate, or cupcakes"
+            value={search}
+            onChange={(e) => change("search", e.target.value)}
+          />
+        </label>
+        <label>
+          Category
+          <select
+            aria-label="Category"
+            value={category}
+            onChange={(e) => change("category", e.target.value)}
+          >
+            {["All", "Cakes", "Cupcakes", "Cookies & bars", "Dessert cups"].map(
+              (value) => (
+                <option key={value}>{value}</option>
+              ),
+            )}
+          </select>
+        </label>
+        <label>
+          Sort by
+          <select
+            aria-label="Sort by"
+            value={sort}
+            onChange={(e) => change("sort", e.target.value)}
+          >
+            <option value="studio">Studio favourites</option>
+            <option value="low">Price: low to high</option>
+            <option value="high">Price: high to low</option>
+          </select>
+        </label>
+        <label className="check-label">
+          <input
+            type="checkbox"
+            checked={eggFree}
+            onChange={(e) => change("eggFree", e.target.checked)}
+          />
+          Egg-free recipes
+        </label>
+      </section>
+      <div className="results-heading">
+        <p aria-live="polite">
+          {visible.length} {visible.length === 1 ? "dessert" : "desserts"} to
+          discover
+        </p>
+        <button className="text-button" onClick={reset}>
+          Reset filters
+        </button>
+      </div>
+      {visible.length ? (
+        <section className="product-grid" aria-label="Desserts">
+          {visible.map((product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              onAdd={onAdd}
+              selected={
+                cart.find((item) => item.id === product.id)?.quantity || 0
+              }
+            />
+          ))}
+        </section>
+      ) : (
+        <section className="empty-state">
+          <h2>No desserts match your search</h2>
+          <p>
+            Try a different flavour or clear the filters to see the whole menu.
+          </p>
+          <button className="button" onClick={reset}>
+            Reset filters
+          </button>
+        </section>
+      )}
+      <p className="recipe-note">
+        Egg-free is a simulated recipe label, not an allergy or
+        cross-contamination guarantee.
+      </p>
+    </>
+  );
 }
