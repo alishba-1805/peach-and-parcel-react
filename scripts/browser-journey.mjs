@@ -1,3 +1,5 @@
+const baseUrl = process.env.BROWSER_BASE_URL || "http://127.0.0.1:4173";
+
 export default async (page) => {
   page.setDefaultTimeout(5000);
   const results = [];
@@ -5,7 +7,7 @@ export default async (page) => {
     results.push({ name, status: condition ? "PASS" : "FAIL" });
     if (!condition) throw new Error(name);
   }
-  await page.goto("http://127.0.0.1:4173/shop");
+  await page.goto(baseUrl + "/shop");
   await page.evaluate(() => {
     localStorage.clear();
     sessionStorage.clear();
@@ -245,7 +247,7 @@ export default async (page) => {
     "confirmation refresh restores receipt",
     (await page.locator(".receipt").innerText()).includes("Little Lemon Loaf"),
   );
-  await page.goto("http://127.0.0.1:4173/checkout");
+  await page.goto(baseUrl + "/checkout");
   await page
     .getByRole("heading", { name: "Your parcel is empty", exact: true })
     .waitFor();

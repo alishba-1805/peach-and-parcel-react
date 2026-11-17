@@ -1,3 +1,5 @@
+const baseUrl = process.env.BROWSER_BASE_URL || "http://127.0.0.1:4173";
+
 export default async (page) => {
   page.setDefaultTimeout(5000);
   const results = [];
@@ -6,7 +8,7 @@ export default async (page) => {
     if (!condition) throw new Error(name);
   };
   async function visit(path) {
-    await page.goto("http://127.0.0.1:4173" + path);
+    await page.goto(baseUrl + path);
     await page.waitForTimeout(650);
   }
   async function click(name) {

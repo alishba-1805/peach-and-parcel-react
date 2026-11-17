@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import ProductImage from "../components/ProductImage.jsx";
 import QuantityControl from "../components/QuantityControl.jsx";
 import OrderSummary, { money } from "../components/OrderSummary.jsx";
-import { checkMinimum } from "../utils/rules.js";
+import { checkMinimum, getLineTotal } from "../utils/rules.js";
 
 export default function Cart({
   cart,
@@ -77,13 +77,7 @@ export default function Cart({
                   )}
                   {product && (
                     <strong className="line-total">
-                      {money(
-                        product.price *
-                          (Number.isSafeInteger(item.quantity) &&
-                          item.quantity > 0
-                            ? item.quantity
-                            : 0),
-                      )}
+                      {money(getLineTotal(item, product))}
                     </strong>
                   )}
                   <button

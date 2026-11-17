@@ -53,9 +53,10 @@ export default function ProductDetails({ products, onAdd }) {
             Recipe labels are simulated, not an allergy or cross-contamination
             guarantee.
           </p>
-          <label>
+          <label htmlFor="product-quantity">
             Quantity
             <input
+              id="product-quantity"
               className="quantity-input"
               type="number"
               min="1"

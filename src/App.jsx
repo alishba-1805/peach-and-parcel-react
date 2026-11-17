@@ -36,12 +36,12 @@ export default function App() {
   const [request, setRequest] = useState({ mode: "normal", version: 0 });
   const [reducedStock, setReducedStock] = useState(false);
   const location = useLocation();
-  const products = catalog.map((product) =>
-    reducedStock &&
-    ["strawberry-bento", "vanilla-cupcakes"].includes(product.id)
-      ? { ...product, stock: product.id === "strawberry-bento" ? 0 : 2 }
-      : product,
-  );
+  const products = catalog.map((product) => {
+    if (!reducedStock) return product;
+    if (product.id === "strawberry-bento") return { ...product, stock: 0 };
+    if (product.id === "vanilla-cupcakes") return { ...product, stock: 2 };
+    return product;
+  });
   const totals = getTotals(cart, products);
   const issues = getCartIssues(cart, products);
   const ready = status === "ready" && products.length > 0;
@@ -94,25 +94,34 @@ export default function App() {
     setRequest((previous) => ({ mode, version: previous.version + 1 }));
   }
 
-  function add(id, quantity) {
+  function addToCart(id, quantity) {
+    if (!ready) return;
     const product = products.find((product) => product.id === id);
-    const existing = cart.find((item) => item.id === id);
-    const nextQuantity = (existing?.quantity || 0) + quantity;
-    const result = checkStock(quantity, product?.stock);
-    const combined = checkStock(nextQuantity, product?.stock);
-    if (!ready || !result.valid || !combined.valid) {
-      setNotice(!result.valid ? result.message : combined.message);
+    const requestedStock = checkStock(quantity, product?.stock);
+    if (!requestedStock.valid) {
+      setNotice(requestedStock.message);
       return;
     }
-    setCart((previous) =>
-      existing
-        ? previous.map((item) =>
-            item.id === id
-              ? { ...item, quantity: item.quantity + quantity }
-              : item,
-          )
-        : [...previous, { id, quantity }],
-    );
+
+    const existing = cart.find((item) => item.id === id);
+    const nextQuantity = (existing?.quantity || 0) + quantity;
+    const combinedStock = checkStock(nextQuantity, product.stock);
+    if (!combinedStock.valid) {
+      setNotice(combinedStock.message);
+      return;
+    }
+
+    if (existing) {
+      setCart((previous) =>
+        previous.map((item) =>
+          item.id === id
+            ? { ...item, quantity: item.quantity + quantity }
+            : item,
+        ),
+      );
+    } else {
+      setCart((previous) => [...previous, { id, quantity }]);
+    }
     setNotice(
       product.name +
         " added. Your parcel now has " +
@@ -121,7 +130,7 @@ export default function App() {
     );
   }
 
-  function update(id, quantity) {
+  function changeQuantity(id, quantity) {
     const product = products.find((product) => product.id === id);
     const result = checkStock(quantity, product?.stock);
     if (!ready || !result.valid) {
@@ -134,19 +143,16 @@ export default function App() {
     setNotice("Quantity updated.");
   }
 
-  function remove(id) {
+  function removeFromCart(id) {
     setCart((previous) => previous.filter((item) => item.id !== id));
     setNotice("Dessert removed from your parcel.");
   }
 
-  function complete(eggFreeOnly) {
-    if (
-      !ready ||
-      !cart.length ||
-      getCartIssues(cart, products, eggFreeOnly).length ||
-      !checkMinimum(totals.subtotal).valid
-    )
-      return false;
+  function completeOrder(eggFreeOnly) {
+    if (!ready || cart.length === 0) return false;
+    const currentIssues = getCartIssues(cart, products, eggFreeOnly);
+    const minimum = checkMinimum(totals.subtotal);
+    if (currentIssues.length > 0 || !minimum.valid) return false;
     const items = cart.map((item) => {
       const product = products.find((product) => product.id === item.id);
       return {
@@ -208,7 +214,7 @@ export default function App() {
                   filters={filters}
                   setFilters={setFilters}
                   cart={cart}
-                  onAdd={add}
+                  onAdd={addToCart}
                 />
               ) : (
                 catalogFeedback
@@ -222,7 +228,7 @@ export default function App() {
                 <ProductDetails
                   key={location.pathname}
                   products={products}
-                  onAdd={add}
+                  onAdd={addToCart}
                 />
               ) : (
                 catalogFeedback
@@ -238,8 +244,8 @@ export default function App() {
                   products={products}
                   totals={totals}
                   issues={issues}
-                  onUpdate={update}
-                  onRemove={remove}
+                  onUpdate={changeQuantity}
+                  onRemove={removeFromCart}
                 />
               ) : (
                 catalogFeedback
@@ -254,7 +260,7 @@ export default function App() {
                   cart={cart}
                   products={products}
                   totals={totals}
-                  onComplete={complete}
+                  onComplete={completeOrder}
                 />
               ) : (
                 catalogFeedback
@@ -283,9 +289,7 @@ export default function App() {
           onReset={() => {
             setReducedStock(false);
             requestCatalog("normal");
-            setNotice(
-              "Catalog and stock restored. Your parcel is kept.",
-            );
+            setNotice("Catalog and stock restored. Your parcel is kept.");
           }}
         />
       </footer>

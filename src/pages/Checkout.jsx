@@ -4,6 +4,7 @@ import OrderSummary, { money } from "../components/OrderSummary.jsx";
 import {
   checkMinimum,
   getCartIssues,
+  getLineTotal,
   SECTORS,
   validateForm,
 } from "../utils/rules.js";
@@ -22,7 +23,7 @@ export default function Checkout({ cart, products, totals, onComplete }) {
   const navigate = useNavigate();
   const issues = getCartIssues(cart, products, values.eggFree);
   const minimum = checkMinimum(totals.subtotal);
-  function change(event) {
+  function updateField(event) {
     const { name, value, checked, type } = event.target;
     setValues((previous) => ({
       ...previous,
@@ -31,7 +32,7 @@ export default function Checkout({ cart, products, totals, onComplete }) {
     setErrors((previous) => ({ ...previous, [name]: "" }));
     setSubmitMessage("");
   }
-  function submit(event) {
+  function handleSubmit(event) {
     event.preventDefault();
     const nextErrors = validateForm(values);
     setErrors(nextErrors);
@@ -56,29 +57,6 @@ export default function Checkout({ cart, products, totals, onComplete }) {
       );
     }
   }
-  function field(name, label, example, type = "text") {
-    return (
-      <label className="form-field" htmlFor={name}>
-        {label}
-        <span className="field-hint">{example}</span>
-        <input
-          id={name}
-          name={name}
-          type={type}
-          value={values[name]}
-          onChange={change}
-          aria-invalid={Boolean(errors[name])}
-          aria-describedby={errors[name] ? name + "-error" : undefined}
-          autoComplete="off"
-        />
-        {errors[name] && (
-          <span id={name + "-error"} className="error-text">
-            {errors[name]}
-          </span>
-        )}
-      </label>
-    );
-  }
   if (!cart.length)
     return (
       <section className="empty-state">
@@ -97,23 +75,55 @@ export default function Checkout({ cart, products, totals, onComplete }) {
           Send some <em>sweetness.</em>
         </h1>
         <p>
-          Simulated checkout · Use sample information only. Nothing is submitted.
+          Simulated checkout · Use sample information only. Nothing is
+          submitted.
         </p>
       </section>
       <div className="checkout-layout">
-        <form className="checkout-form" onSubmit={submit} noValidate>
+        <form className="checkout-form" onSubmit={handleSubmit} noValidate>
           <h2>Fictional delivery details</h2>
           <p className="fine">
             These fields stay in memory for this page only. We never save your
             name, phone or address.
           </p>
-          {field("name", "Sample recipient name", "For example: Sample Recipient")}
-          {field(
-            "phone",
-            "Sample Pakistani mobile",
-            "For example: 03001234567",
-            "tel",
-          )}
+          <label className="form-field" htmlFor="name">
+            Sample recipient name
+            <span className="field-hint">For example: Sample Recipient</span>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              value={values.name}
+              onChange={updateField}
+              aria-invalid={Boolean(errors.name)}
+              aria-describedby={errors.name ? "name-error" : undefined}
+              autoComplete="off"
+            />
+            {errors.name && (
+              <span id="name-error" className="error-text">
+                {errors.name}
+              </span>
+            )}
+          </label>
+          <label className="form-field" htmlFor="phone">
+            Sample Pakistani mobile
+            <span className="field-hint">For example: 03001234567</span>
+            <input
+              id="phone"
+              name="phone"
+              type="tel"
+              value={values.phone}
+              onChange={updateField}
+              aria-invalid={Boolean(errors.phone)}
+              aria-describedby={errors.phone ? "phone-error" : undefined}
+              autoComplete="off"
+            />
+            {errors.phone && (
+              <span id="phone-error" className="error-text">
+                {errors.phone}
+              </span>
+            )}
+          </label>
           <label className="form-field" htmlFor="address">
             Fictional address / instructions
             <span className="field-hint">
@@ -124,7 +134,7 @@ export default function Checkout({ cart, products, totals, onComplete }) {
               name="address"
               rows="3"
               value={values.address}
-              onChange={change}
+              onChange={updateField}
               aria-invalid={Boolean(errors.address)}
               aria-describedby={errors.address ? "address-error" : undefined}
             />
@@ -140,7 +150,7 @@ export default function Checkout({ cart, products, totals, onComplete }) {
               id="sector"
               name="sector"
               value={values.sector}
-              onChange={change}
+              onChange={updateField}
               aria-invalid={Boolean(errors.sector)}
               aria-describedby={errors.sector ? "sector-error" : undefined}
             >
@@ -156,12 +166,13 @@ export default function Checkout({ cart, products, totals, onComplete }) {
             )}
           </label>
           <div className="preference-box">
-            <label className="check-label">
+            <label className="check-label" htmlFor="egg-free-only">
               <input
+                id="egg-free-only"
                 name="eggFree"
                 type="checkbox"
                 checked={values.eggFree}
-                onChange={change}
+                onChange={updateField}
               />
               Egg-free products only
             </label>
@@ -208,15 +219,7 @@ export default function Checkout({ cart, products, totals, onComplete }) {
                   <span>
                     {item.quantity} × {product?.name || item.id}
                   </span>
-                  <strong>
-                    {money(
-                      (product?.price || 0) *
-                        (Number.isSafeInteger(item.quantity) &&
-                        item.quantity > 0
-                          ? item.quantity
-                          : 0),
-                    )}
-                  </strong>
+                  <strong>{money(getLineTotal(item, product))}</strong>
                 </li>
               );
             })}

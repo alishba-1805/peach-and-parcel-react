@@ -1,3 +1,5 @@
+const baseUrl = process.env.BROWSER_BASE_URL || "http://127.0.0.1:4173";
+
 // Optional browser regression checks. Playwright is not an application dependency.
 import { chromium } from 'playwright';
 import { mkdir, writeFile } from 'node:fs/promises';
@@ -30,12 +32,12 @@ try {
   page.screenshot = originalScreenshot;
   await page.unroute('**/*');
   const accessibility = await access(page);
-  await page.goto('http://127.0.0.1:4173/shop');
+  await page.goto(baseUrl + "/shop");
   await page.waitForTimeout(650);
   await page.screenshot({ path: '.cache/browser/desktop-shop-viewport.png' });
   await page.locator('.product-card').first().screenshot({ path: '.cache/browser/card-comparison.png' });
   const results = {
-    date: new Date().toISOString(), target: 'http://127.0.0.1:4173',
+    date: new Date().toISOString(), target: baseUrl,
     build: 'Vite production preview', desktop, recovery: recovered, mobile,
     accessibility, console: { errors, warnings },
   };

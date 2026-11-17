@@ -1,3 +1,5 @@
+const baseUrl = process.env.BROWSER_BASE_URL || "http://127.0.0.1:4173";
+
 export default async (page) => {
   const results = [];
   const check = (name, condition) => {
@@ -6,7 +8,7 @@ export default async (page) => {
   };
   for (const width of [390, 1280]) {
     await page.setViewportSize({ width, height: 900 });
-    await page.goto("http://127.0.0.1:4173/");
+    await page.goto(baseUrl + "/");
     await page.evaluate(() => {
       localStorage.clear();
       sessionStorage.clear();
@@ -106,7 +108,7 @@ export default async (page) => {
       "/checkout",
       "/confirmation",
     ]) {
-      await page.goto("http://127.0.0.1:4173" + path);
+      await page.goto(baseUrl + path);
       await page.waitForTimeout(600);
       check(
         width + " no horizontal overflow " + path,

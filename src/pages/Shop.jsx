@@ -7,22 +7,25 @@ export default function Shop({
   cart = [],
 }) {
   const { search, category, eggFree, sort } = filters;
-  const matches = products.filter(
-    (product) =>
-      (product.name + " " + product.description + " " + product.category)
-        .toLowerCase()
-        .includes(search.trim().toLowerCase()) &&
-      (category === "All" || product.category === category) &&
-      (!eggFree || product.eggFree),
-  );
-  const visible = [...matches].sort((a, b) =>
-    sort === "low"
-      ? a.price - b.price
-      : sort === "high"
-        ? b.price - a.price
-        : 0,
-  );
-  function change(field, value) {
+  const query = search.trim().toLowerCase();
+  const matches = products.filter((product) => {
+    const searchableText = (
+      product.name +
+      " " +
+      product.description +
+      " " +
+      product.category
+    ).toLowerCase();
+    const matchesSearch = searchableText.includes(query);
+    const matchesCategory = category === "All" || product.category === category;
+    const matchesRecipe = !eggFree || product.eggFree;
+    return matchesSearch && matchesCategory && matchesRecipe;
+  });
+
+  const visible = matches.slice();
+  if (sort === "low") visible.sort((a, b) => a.price - b.price);
+  if (sort === "high") visible.sort((a, b) => b.price - a.price);
+  function updateFilter(field, value) {
     setFilters((previous) => ({ ...previous, [field]: value }));
   }
   function reset() {
@@ -41,21 +44,23 @@ export default function Shop({
         </p>
       </section>
       <section aria-label="Find your dessert" className="filters">
-        <label className="search-label">
+        <label className="search-label" htmlFor="product-search">
           Find something sweet
           <input
+            id="product-search"
             type="search"
             placeholder="Try strawberry, chocolate, or cupcakes"
             value={search}
-            onChange={(e) => change("search", e.target.value)}
+            onChange={(e) => updateFilter("search", e.target.value)}
           />
         </label>
-        <label>
+        <label htmlFor="product-category">
           Category
           <select
+            id="product-category"
             aria-label="Category"
             value={category}
-            onChange={(e) => change("category", e.target.value)}
+            onChange={(e) => updateFilter("category", e.target.value)}
           >
             {["All", "Cakes", "Cupcakes", "Cookies & bars", "Dessert cups"].map(
               (value) => (
@@ -64,23 +69,25 @@ export default function Shop({
             )}
           </select>
         </label>
-        <label>
+        <label htmlFor="product-sort">
           Sort by
           <select
+            id="product-sort"
             aria-label="Sort by"
             value={sort}
-            onChange={(e) => change("sort", e.target.value)}
+            onChange={(e) => updateFilter("sort", e.target.value)}
           >
             <option value="studio">Studio favourites</option>
             <option value="low">Price: low to high</option>
             <option value="high">Price: high to low</option>
           </select>
         </label>
-        <label className="check-label">
+        <label className="check-label" htmlFor="egg-free-filter">
           <input
+            id="egg-free-filter"
             type="checkbox"
             checked={eggFree}
-            onChange={(e) => change("eggFree", e.target.checked)}
+            onChange={(e) => updateFilter("eggFree", e.target.checked)}
           />
           Egg-free recipes
         </label>
