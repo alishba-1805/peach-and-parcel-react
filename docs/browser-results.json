@@ -1,0 +1,484 @@
+{
+  "date": "2026-11-17T17:41:54.713Z",
+  "target": "http://127.0.0.1:4173",
+  "build": "Vite production preview",
+  "desktop": [
+    {
+      "name": "FR03 twelve products rendered",
+      "status": "PASS"
+    },
+    {
+      "name": "FR18 comparison data visible on cards",
+      "status": "PASS"
+    },
+    {
+      "name": "FR04 case-insensitive title and description search",
+      "status": "PASS"
+    },
+    {
+      "name": "FR05 combined search and category",
+      "status": "PASS"
+    },
+    {
+      "name": "FR15 zero matches distinct",
+      "status": "PASS"
+    },
+    {
+      "name": "FR05 ascending sort",
+      "status": "PASS"
+    },
+    {
+      "name": "FR05 descending sort",
+      "status": "PASS"
+    },
+    {
+      "name": "FR02 parameterized details",
+      "status": "PASS"
+    },
+    {
+      "name": "FR06 details terms and facts",
+      "status": "PASS"
+    },
+    {
+      "name": "FR01 Back retains sort",
+      "status": "PASS"
+    },
+    {
+      "name": "FR01 Forward restores details route",
+      "status": "PASS"
+    },
+    {
+      "name": "FR08 filter state kept via results link",
+      "status": "PASS"
+    },
+    {
+      "name": "FR11 minimum needed shown",
+      "status": "PASS"
+    },
+    {
+      "name": "R3 under minimum blocked",
+      "status": "PASS"
+    },
+    {
+      "name": "FR07 increase + FR11 exact minimum total",
+      "status": "PASS"
+    },
+    {
+      "name": "FR07 decrease changes live summary",
+      "status": "PASS"
+    },
+    {
+      "name": "FR13 reload restores IDs and quantities",
+      "status": "PASS"
+    },
+    {
+      "name": "FR10 three inline validation errors",
+      "status": "PASS"
+    },
+    {
+      "name": "FR10 valid name preserved",
+      "status": "PASS"
+    },
+    {
+      "name": "R2 compatible single product accepted",
+      "status": "PASS"
+    },
+    {
+      "name": "FR16 explicit simulated confirmation",
+      "status": "PASS"
+    },
+    {
+      "name": "FR16 cart cleared after completion",
+      "status": "PASS"
+    },
+    {
+      "name": "privacy only nonpersonal receipt stored",
+      "status": "PASS"
+    },
+    {
+      "name": "FR16 confirmation refresh restores receipt",
+      "status": "PASS"
+    },
+    {
+      "name": "FR12 repeated checkout cannot reuse cleared cart",
+      "status": "PASS"
+    }
+  ],
+  "recovery": [
+    {
+      "name": "R1 stock 4 rejects quantity 5 with feedback",
+      "status": "PASS"
+    },
+    {
+      "name": "R1 rejected add keeps count zero",
+      "status": "PASS"
+    },
+    {
+      "name": "R1 stock 4 accepts exact quantity 4",
+      "status": "PASS"
+    },
+    {
+      "name": "R1 existing cart cannot exceed stock",
+      "status": "PASS"
+    },
+    {
+      "name": "R2 incompatible single product blocked",
+      "status": "PASS"
+    },
+    {
+      "name": "R2 product-specific conflict",
+      "status": "PASS"
+    },
+    {
+      "name": "R2 ordinary preference restores eligibility",
+      "status": "PASS"
+    },
+    {
+      "name": "R1 reduced stock retains saved quantity",
+      "status": "PASS"
+    },
+    {
+      "name": "R1 reduced stock blocks cart",
+      "status": "PASS"
+    },
+    {
+      "name": "R1 conflict survives route navigation",
+      "status": "PASS"
+    },
+    {
+      "name": "reset restores stock without clearing parcel",
+      "status": "PASS"
+    },
+    {
+      "name": "FR07 remove reaches useful empty state",
+      "status": "PASS"
+    },
+    {
+      "name": "FR14 genuine loader rejection visible",
+      "status": "PASS"
+    },
+    {
+      "name": "FR14 retry returns twelve products",
+      "status": "PASS"
+    },
+    {
+      "name": "FR15 empty dataset separate from zero matches",
+      "status": "PASS"
+    },
+    {
+      "name": "FR15 restore catalog recovers menu",
+      "status": "PASS"
+    },
+    {
+      "name": "FR02 unknown product useful fallback",
+      "status": "PASS"
+    },
+    {
+      "name": "FR01 unknown route useful fallback",
+      "status": "PASS"
+    },
+    {
+      "name": "FR13 malformed storage recovery visible",
+      "status": "PASS"
+    },
+    {
+      "name": "FR13 old IDs retained and explained",
+      "status": "PASS"
+    },
+    {
+      "name": "FR13 restored overstock kept for correction",
+      "status": "PASS"
+    },
+    {
+      "name": "FR13 conflicting restored cart blocked",
+      "status": "PASS"
+    },
+    {
+      "name": "FR13 explicit correction repairs to current stock",
+      "status": "PASS"
+    },
+    {
+      "name": "R1 zero stock add disabled",
+      "status": "PASS"
+    },
+    {
+      "name": "missing image uses local fallback",
+      "status": "PASS"
+    },
+    {
+      "name": "FR16 direct no-receipt route is useful",
+      "status": "PASS"
+    }
+  ],
+  "mobile": [
+    {
+      "name": "FR03 twelve products rendered",
+      "status": "PASS"
+    },
+    {
+      "name": "FR18 comparison data visible on cards",
+      "status": "PASS"
+    },
+    {
+      "name": "FR04 case-insensitive title and description search",
+      "status": "PASS"
+    },
+    {
+      "name": "FR05 combined search and category",
+      "status": "PASS"
+    },
+    {
+      "name": "FR15 zero matches distinct",
+      "status": "PASS"
+    },
+    {
+      "name": "FR05 ascending sort",
+      "status": "PASS"
+    },
+    {
+      "name": "FR05 descending sort",
+      "status": "PASS"
+    },
+    {
+      "name": "FR02 parameterized details",
+      "status": "PASS"
+    },
+    {
+      "name": "FR06 details terms and facts",
+      "status": "PASS"
+    },
+    {
+      "name": "FR01 Back retains sort",
+      "status": "PASS"
+    },
+    {
+      "name": "FR01 Forward restores details route",
+      "status": "PASS"
+    },
+    {
+      "name": "FR08 filter state kept via results link",
+      "status": "PASS"
+    },
+    {
+      "name": "FR11 minimum needed shown",
+      "status": "PASS"
+    },
+    {
+      "name": "R3 under minimum blocked",
+      "status": "PASS"
+    },
+    {
+      "name": "FR07 increase + FR11 exact minimum total",
+      "status": "PASS"
+    },
+    {
+      "name": "FR07 decrease changes live summary",
+      "status": "PASS"
+    },
+    {
+      "name": "FR13 reload restores IDs and quantities",
+      "status": "PASS"
+    },
+    {
+      "name": "FR10 three inline validation errors",
+      "status": "PASS"
+    },
+    {
+      "name": "FR10 valid name preserved",
+      "status": "PASS"
+    },
+    {
+      "name": "R2 compatible single product accepted",
+      "status": "PASS"
+    },
+    {
+      "name": "FR16 explicit simulated confirmation",
+      "status": "PASS"
+    },
+    {
+      "name": "FR16 cart cleared after completion",
+      "status": "PASS"
+    },
+    {
+      "name": "privacy only nonpersonal receipt stored",
+      "status": "PASS"
+    },
+    {
+      "name": "FR16 confirmation refresh restores receipt",
+      "status": "PASS"
+    },
+    {
+      "name": "FR12 repeated checkout cannot reuse cleared cart",
+      "status": "PASS"
+    }
+  ],
+  "accessibility": {
+    "results": [
+      {
+        "name": "390 keyboard Tab reaches primary action",
+        "status": "PASS"
+      },
+      {
+        "name": "390 visible keyboard focus",
+        "status": "PASS"
+      },
+      {
+        "name": "390 Enter navigates to shop",
+        "status": "PASS"
+      },
+      {
+        "name": "390 Tab reaches search",
+        "status": "PASS"
+      },
+      {
+        "name": "390 keyboard search updates results",
+        "status": "PASS"
+      },
+      {
+        "name": "390 Space toggles checkbox",
+        "status": "PASS"
+      },
+      {
+        "name": "390 keyboard add shares count",
+        "status": "PASS"
+      },
+      {
+        "name": "390 full keyboard checkout completes",
+        "status": "PASS"
+      },
+      {
+        "name": "390 no horizontal overflow /",
+        "status": "PASS"
+      },
+      {
+        "name": "390 loaded assets /",
+        "status": "PASS"
+      },
+      {
+        "name": "390 no horizontal overflow /shop",
+        "status": "PASS"
+      },
+      {
+        "name": "390 loaded assets /shop",
+        "status": "PASS"
+      },
+      {
+        "name": "390 no horizontal overflow /products/cinnamon-blondies",
+        "status": "PASS"
+      },
+      {
+        "name": "390 loaded assets /products/cinnamon-blondies",
+        "status": "PASS"
+      },
+      {
+        "name": "390 no horizontal overflow /cart",
+        "status": "PASS"
+      },
+      {
+        "name": "390 loaded assets /cart",
+        "status": "PASS"
+      },
+      {
+        "name": "390 no horizontal overflow /checkout",
+        "status": "PASS"
+      },
+      {
+        "name": "390 loaded assets /checkout",
+        "status": "PASS"
+      },
+      {
+        "name": "390 no horizontal overflow /confirmation",
+        "status": "PASS"
+      },
+      {
+        "name": "390 loaded assets /confirmation",
+        "status": "PASS"
+      },
+      {
+        "name": "1280 keyboard Tab reaches primary action",
+        "status": "PASS"
+      },
+      {
+        "name": "1280 visible keyboard focus",
+        "status": "PASS"
+      },
+      {
+        "name": "1280 Enter navigates to shop",
+        "status": "PASS"
+      },
+      {
+        "name": "1280 Tab reaches search",
+        "status": "PASS"
+      },
+      {
+        "name": "1280 keyboard search updates results",
+        "status": "PASS"
+      },
+      {
+        "name": "1280 Space toggles checkbox",
+        "status": "PASS"
+      },
+      {
+        "name": "1280 keyboard add shares count",
+        "status": "PASS"
+      },
+      {
+        "name": "1280 full keyboard checkout completes",
+        "status": "PASS"
+      },
+      {
+        "name": "1280 no horizontal overflow /",
+        "status": "PASS"
+      },
+      {
+        "name": "1280 loaded assets /",
+        "status": "PASS"
+      },
+      {
+        "name": "1280 no horizontal overflow /shop",
+        "status": "PASS"
+      },
+      {
+        "name": "1280 loaded assets /shop",
+        "status": "PASS"
+      },
+      {
+        "name": "1280 no horizontal overflow /products/cinnamon-blondies",
+        "status": "PASS"
+      },
+      {
+        "name": "1280 loaded assets /products/cinnamon-blondies",
+        "status": "PASS"
+      },
+      {
+        "name": "1280 no horizontal overflow /cart",
+        "status": "PASS"
+      },
+      {
+        "name": "1280 loaded assets /cart",
+        "status": "PASS"
+      },
+      {
+        "name": "1280 no horizontal overflow /checkout",
+        "status": "PASS"
+      },
+      {
+        "name": "1280 loaded assets /checkout",
+        "status": "PASS"
+      },
+      {
+        "name": "1280 no horizontal overflow /confirmation",
+        "status": "PASS"
+      },
+      {
+        "name": "1280 loaded assets /confirmation",
+        "status": "PASS"
+      }
+    ],
+    "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0"
+  },
+  "console": {
+    "errors": [],
+    "warnings": []
+  }
+}
