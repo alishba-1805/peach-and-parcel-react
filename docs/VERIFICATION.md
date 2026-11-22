@@ -51,7 +51,7 @@ Without that override, the runner uses the ordinary preview at http://127.0.0.1:
 | FR16 | PASS | App: completeOrder; Confirmation; readReceipt | Unchanged simulated receipt, safe refresh/no receipt, privacy and cleared cart. |
 | FR17 | PASS | styles.css; control labels | Full pointer/keyboard journeys at 390/1280; focus, assets and no page-wide overflow. |
 | FR18 | PASS | ProductCard; Shop; OrderSummary; DECISIONS.md | Three original observations and unchanged reference captures restored; improvements retested. |
-| FR19 | BLOCKED | vercel.json; docs/DEPLOYMENT.md | Local nested refresh passes. No configured/supplied public deployment URL or public source verification. |
+| FR19 | PASS | vercel.json; docs/DEPLOYMENT.md | Public Vercel suite passes; nested routes refresh; JS/CSS match the tested build. |
 
 ## Business-rule boundaries
 
@@ -103,3 +103,7 @@ No public deployment URL is configured/supplied. GitHub's sole/default branch is
 Work is performed in a linked main worktree because the primary checkout's .git/HEAD is write-protected. Existing history is preserved and only new commits are added. Pushes target alishba-1805/peach-and-parcel-react/main without force.
 
 The tracked report retains [FINAL_COMMIT_HASH]. After the final commit, the submission generator inserts the actual hash into an external standalone report and archives HEAD. Student name/roll are Alishba Inam / 24i-2036. Section and a verified public Vercel URL remain outstanding.
+
+## Public deployment update — 22 November 2026
+
+https://peach-and-parcel-react.vercel.app/ is publicly accessible. The full 150-assertion browser suite was rerun against this URL. Served JS/CSS match local production assets exactly. Authenticated Vercel dashboard commit metadata was not inspected. Section is B. Older blocked statements above describe the 18 November audit; this update supersedes them. See verification/deployment.json.

@@ -1,6 +1,6 @@
 # Viva guide
 
-Alishba Inam · 24i-2036 · Section: [SECTION]
+Alishba Inam · 24i-2036 · Section: B
 
 Use the actual application and source while explaining. The goal is to understand the implementation and its tradeoffs, not memorize a script.
 
@@ -52,4 +52,4 @@ Unknown saved IDs and overstock entries remain until explicit correction/removal
 
 The audit simplified nested conditions, named cart/form actions, made two controlled inputs explicit and shared one line-total helper. CSS, imagery, data, routes, the asynchronous cancellation mechanism and storage safeguards were retained. See [REACT_AUDIT.md](docs/REACT_AUDIT.md) for KEEP decisions and risks.
 
-Public deployment, the real production URL and section still require completion. Refer to actual verification results rather than claiming unperformed checks.
+Public deployment is now verified at https://peach-and-parcel-react.vercel.app/; section is B. Refer to actual verification results rather than claiming unperformed checks.

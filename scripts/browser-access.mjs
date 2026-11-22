@@ -110,6 +110,7 @@ export default async (page) => {
     ]) {
       await page.goto(baseUrl + path);
       await page.waitForTimeout(600);
+      await page.waitForFunction(() => [...document.images].every(image => image.complete && image.naturalWidth > 0), { timeout: 15000 });
       check(
         width + " no horizontal overflow " + path,
         await page.evaluate(

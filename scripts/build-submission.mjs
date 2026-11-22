@@ -14,7 +14,7 @@ if (git("status", "--porcelain")) {
 const commit = git("rev-parse", "HEAD");
 const output = path.join(tmpdir(), "PeachAndParcel-notes-aligned-submission");
 await mkdir(output, { recursive: true });
-const [roll = "24i-2036", name = "AlishbaInam", section = "Section"] = process.argv.slice(2);
+const [roll = "24i-2036", name = "AlishbaInam", section = "B"] = process.argv.slice(2);
 const safe = value => value.replace(/[^a-zA-Z0-9_-]/g, "");
 const archive = path.join(output, [roll, name, section].map(safe).join("_") + "_A#02.zip");
 execFileSync("git", [...gitOptions, "-c", "core.autocrlf=false", "archive", "--format=zip", "--output=" + archive, "HEAD"]);
@@ -37,7 +37,7 @@ const manifest = {
   archiveSha256: createHash("sha256").update(await readFile(archive)).digest("hex"),
   reportHtml,
   reportPdf: path.join(output, "Peach_and_Parcel_Report.pdf"),
-  deployment: "BLOCKED: no verified production URL",
+  deployment: "https://peach-and-parcel-react.vercel.app/",
 };
 await writeFile(path.join(output, "submission-manifest.json"), JSON.stringify(manifest, null, 2));
 console.log(JSON.stringify(manifest, null, 2));

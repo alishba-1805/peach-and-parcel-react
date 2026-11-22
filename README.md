@@ -2,7 +2,7 @@
 
 A React storefront for a boutique dessert studio, with a complete journey from product discovery to order review.
 
-[Explore the source](https://github.com/alishba-1805/peach-and-parcel-react) · [Design decisions](DECISIONS.md) · [Testing](docs/TESTING.md)
+[Live website](https://peach-and-parcel-react.vercel.app/) · [Explore the source](https://github.com/alishba-1805/peach-and-parcel-react) · [Design decisions](DECISIONS.md) · [Testing](docs/TESTING.md)
 
 ![Peach & Parcel storefront](docs/images/storefront-desktop.png)
 
@@ -162,10 +162,12 @@ Vercel configuration is included for client-side routing. Public deployment rema
 
 ## Submission artifacts
 
-The editable report is [docs/REPORT.html](docs/REPORT.html). Run node scripts/build-submission.mjs after the final commit to create a matching source ZIP and standalone report outside the repository. The report template keeps [FINAL_COMMIT_HASH]; generated artifacts use the actual HEAD. Section remains [SECTION] until supplied.
+The editable report is [docs/REPORT.html](docs/REPORT.html). Run node scripts/build-submission.mjs after the final commit to create a matching source ZIP and standalone report outside the repository. The report template keeps [FINAL_COMMIT_HASH]; generated artifacts use the actual HEAD. Section remains B until supplied.
 
 ## Author
 
 **[Alishba Inam](https://github.com/alishba-1805)**
 **Roll number:** 24i-2036
 BS Cyber Security · FAST-NUCES, Islamabad
+
+Public deployment verified on 22 November 2026; see [deployment evidence](docs/verification/deployment.json).

@@ -48,4 +48,4 @@ Build with npm run build and publish the contents of dist. Configure an SPA fall
 
 ## Current status
 
-Vercel configuration is ready. A public deployment URL has not yet been configured.
+Vercel configuration is ready. Public site: https://peach-and-parcel-react.vercel.app/ — verified 22 November 2026. Public JS/CSS match the tested build byte-for-byte; authenticated dashboard Git metadata was not inspected.
